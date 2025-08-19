@@ -16,7 +16,8 @@ export const initialStore = () => {
     starWars: {
       people: [],
       vehicles: [],
-      planets: []
+      planets: [],
+      favorities: []
     }
   }
 }
@@ -32,12 +33,22 @@ export default function storeReducer(store, action = {}) {
         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
       };
     case 'set_starwars':
-      const { feature, results } = action.payload
+      const { feature, results } = action.payload;
       return {
         ...store,
         starWars: {
           ...store.starWars,
           [feature]: [...results]
+        }
+      }
+    case 'add_favorite':
+      const {featureFav, name} = action.payload
+
+      return {
+        ...store,
+        starWars: {
+          ...store.starWars,
+          favorities: [...store.starWars.favorities, {featureFav:featureFav, name:name}]
         }
       }
     default:

@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import storeReducer from '../store';
+import useGlobalReducer from '../hooks/useGlobalReducer';
 
 const Card = (props) => {
     const result = props.result;
@@ -13,7 +15,7 @@ const Card = (props) => {
                     <Link to={`/details/${props.feature}/${result.uid}`}>
                         <button type="button" className="btn btn-primary">Learn more!</button>
                     </Link>
-                    <button type="button" className="btn btn-outline-warning"><i className="fa-solid fa-heart"></i></button>
+                    <button type="button" className="btn btn-outline-warning" onClick={props.onFavorite}><i className="fa-solid fa-heart"></i></button>
                 </div>
             </div>
         </div>

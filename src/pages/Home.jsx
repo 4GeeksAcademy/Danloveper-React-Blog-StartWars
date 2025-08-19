@@ -28,16 +28,22 @@ export const Home = () => {
 		getInfoStarWars('planets');
 	}, [])
 
+	function handleAddFavorite (feature, name) {
+		console.log(feature)
+		console.log(name)
+		dispatch({type:'add_favorite', payload:{featureFav:feature, name:name}})
+	}
+
 	return (
 		<div className="container">
 			{Object.entries(store.starWars).map(([feature,results]) => {
-				return (
+				return (feature != 'favorities' &&
 					<div key={feature} className="row mt-2">
 						<h1 className="text-danger border-bottom">{feature}</h1>
 						<div className="row flex-nowrap overflow-x-auto">
 							{results.map((result)=>{
 								return (
-									<Card key={result.uid} feature={feature} result={result} />
+									<Card key={result.uid} feature={feature} result={result} onFavorite={()=>{handleAddFavorite(feature,result.name)}} />
 								);
 							})}
 
