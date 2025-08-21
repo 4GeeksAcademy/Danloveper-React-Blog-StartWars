@@ -42,15 +42,26 @@ export default function storeReducer(store, action = {}) {
         }
       }
     case 'add_favorite':
-      const {featureFav, name} = action.payload
+      const { featureFav, name, uid } = action.payload
 
       return {
         ...store,
         starWars: {
           ...store.starWars,
-          favorities: [...store.starWars.favorities, {featureFav:featureFav, name:name}]
+          favorities: [...store.starWars.favorities, { featureFav: featureFav, name: name, uid: uid }]
         }
       }
+      case 'delete_favorite':
+        const favoritiesUpdate = action.payload
+
+        return {
+          ...store,
+          starWars: {
+          ...store.starWars,
+          favorities: [...favoritiesUpdate]
+          }
+        }
+
     default:
       throw Error('Unknown action.');
   }

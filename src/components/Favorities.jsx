@@ -6,6 +6,11 @@ const Favorities = () => {
 
     const { store, dispatch } = useGlobalReducer()
 
+    function handleDeleteFavorite(favoriteUid){
+        const favoritiesUpdate = store.starWars.favorities.filter(favorite=> favorite.uid != favoriteUid)
+        dispatch({type:'delete_favorite', payload: favoritiesUpdate });
+    }
+
     return (
         <>
             {/* Example single danger button */}
@@ -18,17 +23,17 @@ const Favorities = () => {
                 >
                     Favorities {store.starWars.favorities && store.starWars.favorities.length}
                 </button>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu dropdown-menu-end">
                     {store.starWars.favorities.length > 0 ? store.starWars.favorities.map(
                         (favorite) => {
                             return (
-                                <li key={favorite.name}>
-                                    <Link to={`/details`}> <a className="dropdown-item" href="#">
+                                <li className="d-flex justify-content-between" key={favorite.name}>
+                                    <Link to={`/details/${favorite.featureFav}/${favorite.uid}`}> <button className="dropdown-item" >
                                         {favorite.name}
-                                    </a></Link> 
+                                    </button></Link>
+                                    <i className="mx-3 my-2 fa-solid fa-trash-can fa-xl" onClick={()=>{handleDeleteFavorite(favorite.uid)}}></i>
                                 </li>)
                         }
-
                     ) : <li>
                         <a className="dropdown-item" href="#">
                             (empty)

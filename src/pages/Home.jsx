@@ -28,10 +28,8 @@ export const Home = () => {
 		getInfoStarWars('planets');
 	}, [])
 
-	function handleAddFavorite (feature, name) {
-		console.log(feature)
-		console.log(name)
-		dispatch({type:'add_favorite', payload:{featureFav:feature, name:name}})
+	function handleAddFavorite (feature, name, uid) {
+		dispatch({type:'add_favorite', payload:{featureFav:feature, name:name, uid:uid}})
 	}
 
 	return (
@@ -43,7 +41,7 @@ export const Home = () => {
 						<div className="row flex-nowrap overflow-x-auto">
 							{results.map((result)=>{
 								return (
-									<Card key={result.uid} feature={feature} result={result} onFavorite={()=>{handleAddFavorite(feature,result.name)}} />
+									<Card key={result.uid} feature={feature} result={result} onFavorite={()=>{handleAddFavorite(feature, result.name, result.uid)}} />
 								);
 							})}
 

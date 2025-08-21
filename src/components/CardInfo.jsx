@@ -3,6 +3,8 @@ import React from 'react'
 const CardInfo = (props) => {
 
     const result = props.result;
+    console.log(result)
+
     return (result.hasOwnProperty('properties') &&
         <div className="container">
             <div className="row">
@@ -13,6 +15,18 @@ const CardInfo = (props) => {
                     <h1>{result.properties.name}</h1>
                     <p>{result.description}</p>
                 </div>
+            </div>
+            <div className="row mt-4 border-top border-danger">
+                {Object.entries(result.properties).map(([title, description], index) => {
+                    if (index < 5) {
+                        return (
+                            <div className='col text-center text-danger'>
+                                <h2>{title}</h2>
+                                <p>{description}</p>
+                            </div>
+                        )
+                    }
+                })}
             </div>
         </div>
     )

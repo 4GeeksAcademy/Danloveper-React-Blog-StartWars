@@ -4,8 +4,6 @@ import Favorities from "./Favorities";
 export const Navbar = () => {
 
 
-
-
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
